@@ -71,5 +71,14 @@ Alice public key and vice versa
 All this parameters could, e.g., be set programmatically, as shown in the Python based example implementation.
 
 ## Implementation of the protocol in python
+The Python based implementation of the described protocol needs certain parameters configured before execution:
+- aliceAddress: Alice address
+- alicePrivateKey: The private key for Alice account
+- alicePublicKey: The public key for Alice account
+- bobsAddress: Bobs address
+- bobsPrivateKey: The private key for Bobs account
+- bobsPublicKey: The public key for Bobs account
+- secret: the secret used for the hashlock
+- assetId: id of the asset that should be swapped against Waves
 
 ## Next steps
