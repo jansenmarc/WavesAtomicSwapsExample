@@ -19,12 +19,13 @@ the swap of the asset it atomic, in the sense that either both transfers happen 
   the hashlock.
 - Alice sends a signed tx with coinA to Bob, including hash(s).
 - Bob secures his account by a contract that checks:
-  - either if blockheight > timelock (smaller than the timelock of Alice contract) and
+  - either if blockheight > timelock (height when the contract was activated + m, with m < n) and
   signed by Bob
   - if tx is signed by alice and s is included so that it is valid for the hashlock
 - Bob sends a signed tx with coinB to Alice, including hash(s).
 - If Alice executes a transaction that fullfills Bobs contract, she reveals the secret to Bob which allows him to
 to execute the first transaction.
+
 If either Bob or Alice do not send transactions that fullfill the corresponding contracts, both will be able to
 transfer the funds back to their accounts after the timelock passed. Actually, the described protocol for AS is a
 combination of hash- and timelocks. Therefore, this example could also be helpful for understanding those two usecases.
