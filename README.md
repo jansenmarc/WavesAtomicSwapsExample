@@ -52,13 +52,23 @@ match tx {
         (signedByUser2 && afterTimelock) || (signedByUser1 && secretMatches)
 }
 ```
-One important thing about this code is that the first part of the case:
+One important thing about this code is that the first part of the case section:
 ```python
     case t : SetScriptTransaction => true
 ```
 is just there for testing purposes. This allows to redeploy contracts to the accounts, which is important during
 development and/or testing, but would be a security problem in a production system, since everybody would be able
 deploy a new SC to the used accounts, bypassing the described protocol.
+
+Furthermore, the code describes some variables that need to be filled:
+- $firstPublicKey: the public key protecting the contract via the hashlock, in case of Alice contract this needs to be
+Bobs public key and vice versa
+- $secondPublicKey: the public key protecting the contract via the timelock, in case of Alice contract this needs to be
+Alice public key and vice versa
+- $lockheight: the heights up to which the contract is protected against a "refund" for Alice and Bob
+- $base58EncodedHashedSecret: the Base58 encoded version of the hash of the secret s
+
+All this parameters could, e.g., be set programmatically, as shown in the Python based example implementation.
 
 ## Implementation of the protocol in python
 
