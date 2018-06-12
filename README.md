@@ -29,3 +29,30 @@ to execute the first transaction.
 If either Bob or Alice do not send transactions that fullfill the corresponding contracts, both will be able to
 transfer the funds back to their accounts after the timelock passed. Actually, the described protocol for AS is a
 combination of hash- and timelocks. Therefore, this example could also be helpful for understanding those two usecases.
+
+## Implementation of the SC
+Both Alice and Bob deploy the same smart contract with slightly different parameters, especially for the keys that are
+allowed to sign a transaction and the timelock. The RIDE based contract for the above described protocol may look like
+this:
+
+```python
+match tx {
+    case t : SetScriptTransaction => true
+    case _ =>
+        let pubKeyUser1 = base58'$firstPublicKey'
+        let pubKeyUser2 = base58'$secondPublicKey'
+        let lockHeight = " + str($lockheight)
+        let hashedSecret = tx.proofs[1]
+        let preimage = tx.proofs[2]
+        let hashPreimage = sha256(preimage)
+        let secretMatches = hashPreimage == base58'$base58EncodedHashedSecret'
+        let signedByUser1 = sigVerify(tx.bodyBytes, tx.proofs[0], pubKeyUser1)
+        let signedByUser2 = sigVerify(tx.bodyBytes, tx.proofs[0], pubKeyUser2)
+        let afterTimelock = height > lockHeight
+        (signedByUser2 && afterTimelock) || (signedByUser1 && secretMatches)
+}
+```
+
+## Implementation of the protocol in python
+
+## Next steps
