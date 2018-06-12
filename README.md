@@ -6,3 +6,5 @@ into how AS will work. This repository targets an easy to understand example for
 to keep it simple, the AS swaps Waves against a defined asset. Usually, one of the assets that are swapped would be an
 asset on a different blockchain, but the swap protocol could also be performed on one chain, e.g., both assets are
 on the Waves blockchain, in order to keep the example easy.
+
+## General description of the protocol
