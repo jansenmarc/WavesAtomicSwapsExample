@@ -80,5 +80,10 @@ The Python based implementation of the described protocol needs certain paramete
 - bobsPublicKey: The public key for Bobs account
 - secret: the secret used for the hashlock
 - assetId: id of the asset that should be swapped against Waves
+- node: the testnet node you want to connect to for broadcasting the transactions
 
 ## Next steps
+The provided example is a simplification of the described protocol in order to show how the protocol works. Next steps
+would be to automate the protocol further, e.g., by automatically generating the necessary addresses for Alice and Bob,
+send the generated transactions via the network (currently they are just copied locally) and potentially extend the idea
+towards trustless gateways.
