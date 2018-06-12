@@ -52,6 +52,13 @@ match tx {
         (signedByUser2 && afterTimelock) || (signedByUser1 && secretMatches)
 }
 ```
+One important thing about this code is that the first part of the case:
+```python
+    case t : SetScriptTransaction => true
+```
+is just there for testing purposes. This allows to redeploy contracts to the accounts, which is important during
+development and/or testing, but would be a security problem in a production system, since everybody would be able
+deploy a new SC to the used accounts, bypassing the described protocol.
 
 ## Implementation of the protocol in python
 
